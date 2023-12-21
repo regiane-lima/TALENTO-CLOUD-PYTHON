@@ -1,41 +1,27 @@
-def mostrarNumero():
-    print('Escreva um número menor ou igual a 100')
-    numero_valido = False
-
-    while not numero_valido:
+def obter_numero(mensagem):
+    while True:
         try:
-            num = int(input())
-            if num > 100:
-                print('Precisa ser um número menor ou igual a 100')
-            elif num < 0:
-                print('Não é permitido inserir números negativos')
-            else:
-                print('Ótimo, você escolheu o ' + str(num))
-                numero_valido = True
+            num = int(input(mensagem))
+            return num
         except ValueError:
             print('Precisa ser um número inteiro')
 
-def verificarPar():
-    try:
-        num = int(input('Insira um número: '))
-        if num % 2 == 0:
-            print('Ótimo, você inseriu um número par:', num)
-        else:
-            raise ValueError('Erro: O número inserido não é par')
-    except ValueError as ve:
-        print(ve)
+def mostrar_numero():
+    numero = obter_numero('Escreva um número entre 0 e 100: ')
+    while not (0 <= numero <= 100):
+        print('Número inválido. Deve estar entre 0 e 100.')
+        numero = obter_numero('Escreva um número entre 0 e 100: ')
+    print(f'Ótimo, você escolheu o {numero}')
 
-def verificarDivisivel():
-    try:
-        num = int(input('Insira um número: '))
-        if num % 2 == 0 or num % 3 == 0:
-            print(f'O número {num} é divisível por 2 ou por 3')
-        else:
-            print(f'O número {num} não é divisível por 2 ou por 3')
-    except ValueError:
-        print('Precisa ser um número inteiro')
+def verificar_par():
+    num = obter_numero('Insira um número: ')
+    print(f'Ótimo, você inseriu um número par: {num}' if num % 2 == 0 else 'Erro: O número inserido não é par')
+
+def verificar_divisivel():
+    num = obter_numero('Insira um número: ')
+    print(f'O número {num} é divisível por 2 ou por 3' if num % 2 == 0 or num % 3 == 0 else f'O número {num} não é divisível por 2 ou por 3')
 
 # Testar as funções
-mostrarNumero()
-verificarPar()
-verificarDivisivel()
+mostrar_numero()
+verificar_par()
+verificar_divisivel()
